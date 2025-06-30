@@ -38,8 +38,7 @@ export default async function handler(req, res) {
           'Position': req.body.position,
           'Problem': req.body.problem,
           'Budget': req.body.budget,
-          'Industry': req.body.industry,
-          'Timestamp': new Date().toISOString()
+          'Industry': req.body.industry
         }
       })
     });
