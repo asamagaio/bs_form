@@ -25,6 +25,22 @@ export default async function handler(req, res) {
 
     console.log('Request body:', req.body);
 
+    // Map form values to match Airtable schema
+    const fields = {
+      'Name': req.body.name,
+      'Company': req.body.company,
+      'Problem': req.body.problem,
+      'Budget': req.body.budget,
+      'Industry': req.body.industry
+    };
+
+    // Only add Position if it has a value, to avoid select field issues
+    if (req.body.position && req.body.position.trim() !== '') {
+      fields['Position'] = req.body.position;
+    }
+
+    console.log('Fields being sent to Airtable:', fields);
+
     const response = await fetch(`https://api.airtable.com/v0/${process.env.AIRTABLE_BASE_ID}/${process.env.AIRTABLE_TABLE_NAME}`, {
       method: 'POST',
       headers: {
@@ -32,14 +48,7 @@ export default async function handler(req, res) {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        fields: {
-          'Name': req.body.name,
-          'Company': req.body.company,
-          'Position': req.body.position,
-          'Problem': req.body.problem,
-          'Budget': req.body.budget,
-          'Industry': req.body.industry
-        }
+        fields: fields
       })
     });
 
