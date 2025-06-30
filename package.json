@@ -1,0 +1,15 @@
+{
+  "name": "bs-form",
+  "version": "1.0.0",
+  "description": "Buy and Sell form for investment decisions",
+  "main": "index.html",
+  "dependencies": {
+    "node-fetch": "^3.3.2"
+  },
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": ">=16.0.0"
+  }
+}
